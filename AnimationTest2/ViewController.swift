@@ -10,16 +10,38 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var myView: UIView!
+    var boxIsVisible = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+   
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    var originalX:CGFloat = 0.0
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        originalX = self.myView.frame.origin.x
+        if boxIsVisible == false {
+           self.myView.center.x -= 200
+        }
     }
 
+    
+    @IBAction func slideInAction(sender: AnyObject) {
+        UIView.animateWithDuration(3.0, animations: {
+            self.myView.center.x = self.originalX
+                 self.boxIsVisible = true
+            
+        })
+}
 
+    @IBAction func slideOutAction(sender: AnyObject) {
+        UIView.animateWithDuration(3.0, animations: {
+            self.myView.center.x = -200
+                 self.boxIsVisible = false
+        })
+    }
 }
 
